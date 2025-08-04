@@ -54,13 +54,35 @@ export default function Home() {
           responseText += `**⏱️ Preparation Time:** ${recipe.prep_time}\n`
           responseText += `**🔥 Cooking Time:** ${recipe.cook_time}\n\n`
 
-          // Add cooking tips based on recipe type
-          if (recipe.name.toLowerCase().includes('spicy') || recipe.name.toLowerCase().includes('curry')) {
-            responseText += `**🔥 Pro Tip:** This dish is perfect for spice lovers! Adjust the heat level to your preference.\n\n`
-          } else if (recipe.name.toLowerCase().includes('healthy') || recipe.name.toLowerCase().includes('salad')) {
-            responseText += `**🥗 Pro Tip:** A nutritious choice that's both delicious and good for you!\n\n`
-          } else {
-            responseText += `**👨‍🍳 Pro Tip:** This recipe is a crowd-pleaser and perfect for any occasion!\n\n`
+          // Add ingredients
+          if (recipe.ingredients && recipe.ingredients.length > 0) {
+            responseText += `**🥘 Ingredients:**\n`
+            recipe.ingredients.forEach((ingredient, idx) => {
+              responseText += `• ${ingredient}\n`
+            })
+            responseText += `\n`
+          }
+
+          // Add instructions
+          if (recipe.instructions && recipe.instructions.length > 0) {
+            responseText += `**👨‍🍳 Instructions:**\n`
+            recipe.instructions.forEach((instruction, idx) => {
+              if (instruction.toLowerCase().includes('pro tip')) {
+                responseText += `💡 **${instruction}**\n\n`
+              } else {
+                responseText += `${idx + 1}. ${instruction}\n`
+              }
+            })
+            responseText += `\n`
+          }
+
+          // Add YouTube videos
+          if (recipe.youtube_videos && recipe.youtube_videos.length > 0) {
+            responseText += `**📺 Watch How to Make It:**\n`
+            recipe.youtube_videos.forEach((video, idx) => {
+              responseText += `• ${video}\n`
+            })
+            responseText += `\n`
           }
 
           responseText += `---\n\n`
