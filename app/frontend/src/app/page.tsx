@@ -50,9 +50,9 @@ export default function Home() {
 
         response.recipes?.forEach((recipe, index) => {
           responseText += `### **${index + 1}. ${recipe.name}** 🌟\n\n`
-          responseText += `> *"${recipe.description}"*\n\n`
+          responseText += `**🍽️ Cuisine:** ${recipe.cuisine_type}\n`
           responseText += `**⏱️ Preparation Time:** ${recipe.prep_time}\n`
-          responseText += `**👥 Perfect For:** ${recipe.servings} people\n\n`
+          responseText += `**🔥 Cooking Time:** ${recipe.cook_time}\n\n`
 
           // Add cooking tips based on recipe type
           if (recipe.name.toLowerCase().includes('spicy') || recipe.name.toLowerCase().includes('curry')) {
@@ -80,14 +80,8 @@ export default function Home() {
           responseText += `### **${index + 1}. ${restaurant.name}** 🏆\n\n`
           responseText += `**🍽️ Cuisine:** *${restaurant.cuisine_type}*\n\n`
 
-          // Enhanced location display
-          if (restaurant.location && restaurant.location !== 'undefined') {
-            responseText += `📍 **Location:** ${restaurant.location}\n`
-          } else {
-            responseText += `📍 **Location:** Near your area (Electronic City Phase 1)\n`
-          }
-
-          responseText += `⭐ **Rating:** ${restaurant.rating}/5 (${getRatingDescription(restaurant.rating)})\n\n`
+          responseText += `📍 **Address:** ${restaurant.address}\n`
+          responseText += `⭐ **Rating:** ${restaurant.rating || 'N/A'}/5 (${restaurant.rating ? getRatingDescription(restaurant.rating) : 'Not rated'})\n\n`
 
           // Add restaurant-specific recommendations
           if (restaurant.name.toLowerCase().includes('a2b') || restaurant.name.toLowerCase().includes('adyar')) {
