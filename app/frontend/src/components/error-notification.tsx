@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, AlertCircle } from 'lucide-react'
 
@@ -11,11 +11,11 @@ interface ErrorNotificationProps {
   type?: 'error' | 'warning' | 'info'
 }
 
-export function ErrorNotification({ 
-  message, 
-  isVisible, 
-  onClose, 
-  type = 'error' 
+export function ErrorNotification({
+  message,
+  isVisible,
+  onClose,
+  type = 'error'
 }: ErrorNotificationProps) {
   useEffect(() => {
     if (isVisible) {

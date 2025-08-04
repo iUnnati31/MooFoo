@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Clock, Users, Star, MapPin, ChefHat, Utensils } from 'lucide-react'
+import { Clock, Star, MapPin, ChefHat, Utensils } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 

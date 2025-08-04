@@ -1,12 +1,12 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { ChatInterface } from '@/components/chat-interface'
-import { api, FoodRecommendation as ApiFoodRecommendation, ApiError } from '@/lib/api'
+import { api, FoodRecommendation as ApiFoodRecommendation } from '@/lib/api'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
-  const [currentRecommendation, setCurrentRecommendation] = useState<ApiFoodRecommendation | null>(null)
+  const [, setCurrentRecommendation] = useState<ApiFoodRecommendation | null>(null)
 
   // Helper function to get rating description
   const getRatingDescription = (rating: number): string => {
@@ -40,20 +40,20 @@ export default function Home() {
       })
 
       setCurrentRecommendation(response)
-      
+
       // Create a much more engaging and detailed response
       let responseText = ""
-      
+
       if (response.recommendation_type === 'recipe') {
         responseText += "## 🍳 **Perfect Recipes for Your Mood!** ✨\n\n"
         responseText += "Based on your preferences, here are some amazing recipes that will delight your taste buds:\n\n"
-        
+
         response.recipes?.forEach((recipe, index) => {
           responseText += `### **${index + 1}. ${recipe.name}** 🌟\n\n`
           responseText += `> *"${recipe.description}"*\n\n`
           responseText += `**⏱️ Preparation Time:** ${recipe.prep_time}\n`
           responseText += `**👥 Perfect For:** ${recipe.servings} people\n\n`
-          
+
           // Add cooking tips based on recipe type
           if (recipe.name.toLowerCase().includes('spicy') || recipe.name.toLowerCase().includes('curry')) {
             responseText += `**🔥 Pro Tip:** This dish is perfect for spice lovers! Adjust the heat level to your preference.\n\n`
@@ -62,33 +62,33 @@ export default function Home() {
           } else {
             responseText += `**👨‍🍳 Pro Tip:** This recipe is a crowd-pleaser and perfect for any occasion!\n\n`
           }
-          
+
           responseText += `---\n\n`
         })
-        
+
         responseText += `### 🎯 **Why These Recipes?**\n\n`
         responseText += `Based on your mood and preferences, I've selected recipes that will:\n`
         responseText += `• **Elevate your spirits** with amazing flavors\n`
         responseText += `• **Match your cravings** perfectly\n`
         responseText += `• **Be easy to prepare** at home\n\n`
-        
+
       } else if (response.recommendation_type === 'restaurant') {
         responseText += "## 🍽️ **Amazing Restaurants Just for You!** 🌟\n\n"
         responseText += "I've handpicked these fantastic restaurants that match your mood and preferences perfectly:\n\n"
-        
+
         response.restaurants?.forEach((restaurant, index) => {
           responseText += `### **${index + 1}. ${restaurant.name}** 🏆\n\n`
           responseText += `**🍽️ Cuisine:** *${restaurant.cuisine_type}*\n\n`
-          
+
           // Enhanced location display
           if (restaurant.location && restaurant.location !== 'undefined') {
             responseText += `📍 **Location:** ${restaurant.location}\n`
           } else {
             responseText += `📍 **Location:** Near your area (Electronic City Phase 1)\n`
           }
-          
+
           responseText += `⭐ **Rating:** ${restaurant.rating}/5 (${getRatingDescription(restaurant.rating)})\n\n`
-          
+
           // Add restaurant-specific recommendations
           if (restaurant.name.toLowerCase().includes('a2b') || restaurant.name.toLowerCase().includes('adyar')) {
             responseText += `**🎯 Why You'll Love It:** Famous for their authentic South Indian breakfast and delicious sweets! Perfect for a hearty meal.\n\n`
@@ -99,10 +99,10 @@ export default function Home() {
           } else {
             responseText += `**🎯 Why You'll Love It:** Excellent food quality and great value for money!\n\n`
           }
-          
+
           responseText += `---\n\n`
         })
-        
+
         responseText += `### 🎯 **Perfect Match for Your Mood!**\n\n`
         responseText += `These restaurants are specially chosen because they:\n`
         responseText += `• **Match your spice preferences** perfectly\n`
@@ -110,11 +110,11 @@ export default function Home() {
         responseText += `• **Have great ratings** from happy customers\n`
         responseText += `• **Are conveniently located** near you\n\n`
       }
-      
+
       // Enhanced mood analysis with more personality
       responseText += `### 🎭 **Your Mood Analysis** 💫\n\n`
       responseText += `*"${response.mood_analysis}"*\n\n`
-      
+
       // Add personalized mood-based insights
       if (message.toLowerCase().includes('good mood') || message.toLowerCase().includes('happy')) {
         responseText += `**💡 My Recommendation:** Your positive energy is contagious! These options will amplify your great mood and create an even more amazing dining experience! ✨\n\n`
@@ -127,7 +127,7 @@ export default function Home() {
       } else {
         responseText += `**💡 My Recommendation:** Based on your current mood, these options will definitely lift your spirits and satisfy your cravings!\n\n`
       }
-      
+
       // Add call to action
       responseText += `### 🚀 **What's Next?**\n\n`
       if (response.recommendation_type === 'recipe') {
@@ -141,9 +141,9 @@ export default function Home() {
         responseText += `• **Popular dishes** recommendations\n`
         responseText += `• **More restaurant options**\n\n`
       }
-      
+
       responseText += `**🍽️ Happy eating!** Let me know how it goes! 😊`
-      
+
       return responseText
     } catch (error) {
       console.error('Error processing message:', error)
@@ -153,7 +153,7 @@ export default function Home() {
     }
   }
 
-    return (
+  return (
     <div className="app-container">
       {/* Floating Food Particles */}
       <div className="floating-particles">
@@ -172,7 +172,7 @@ export default function Home() {
       {/* Main Content */}
       <div className="main-content">
         <div className="chat-wrapper">
-          <ChatInterface 
+          <ChatInterface
             onSendMessage={handleSendMessage}
             isLoading={isLoading}
           />
