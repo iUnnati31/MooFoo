@@ -87,7 +87,7 @@ export function FoodRecommendation({ type, mood, recipes = [], restaurants = [] 
                 <Card className="hover:shadow-xl transition-all duration-300 border-orange-500/20 hover:border-orange-500">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-lg font-display text-amber-800">{recipe.name}</CardTitle>
-                    <p className="text-sm text-gray-600">{recipe.description}</p>
+                    <p className="text-sm text-gray-600">{recipe.cuisine_type} cuisine</p>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center justify-between text-sm">
@@ -146,7 +146,7 @@ export function FoodRecommendation({ type, mood, recipes = [], restaurants = [] 
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <CardTitle className="text-lg font-display text-amber-800">{restaurant.name}</CardTitle>
-                        <p className="text-sm text-gray-600">{restaurant.description}</p>
+                        <p className="text-sm text-gray-600">{restaurant.cuisine_type} restaurant</p>
                       </div>
                       <div className="flex items-center space-x-1">
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
