@@ -37,7 +37,8 @@ app.add_middleware(
         "http://127.0.0.1:3001",
         "http://localhost:5173",  # Vite dev server default port
         "https://moofoo-recomm.vercel.app",
-        "https://moofoo-frontend.vercel.app",  # Add your Vercel frontend URL
+        "https://moofoo-frontend.vercel.app",
+        "https://moo-foo-bfgz.vercel.app",  # Your specific Vercel domain
         "https://*.vercel.app",  # Allow any Vercel subdomain
         "https://*.onrender.com",  # Allow any Render subdomain
         os.getenv("FRONTEND_URL", ""),  # Allow environment variable override
