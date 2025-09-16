@@ -53,7 +53,7 @@ export function ChatInterface({ onSendMessage, isLoading = false }: ChatInterfac
 
     try {
       const response = await onSendMessage(currentInput)
-      
+
       // Add a small delay to make the chat feel more natural
       setTimeout(() => {
         // Add AI response to messages
@@ -63,12 +63,12 @@ export function ChatInterface({ onSendMessage, isLoading = false }: ChatInterfac
           isUser: false,
           timestamp: new Date()
         }
-        
+
         setMessages(prev => [...prev, aiMessage])
       }, 500)
     } catch (error) {
       console.error('Error sending message:', error)
-      
+
       // Add error message
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -76,7 +76,7 @@ export function ChatInterface({ onSendMessage, isLoading = false }: ChatInterfac
         isUser: false,
         timestamp: new Date()
       }
-      
+
       setMessages(prev => [...prev, errorMessage])
     }
   }
@@ -89,9 +89,9 @@ export function ChatInterface({ onSendMessage, isLoading = false }: ChatInterfac
   }
 
   const quickSuggestions = [
-    { text: "I'm craving spicy North Indian food! 🌶️", emoji: "🔥" },
+    { text: "Long day... I need a simple, comforting recipe", emoji: "😌" },
     { text: "Show me healthy vegetarian recipes", emoji: "🥗" },
-    { text: "Find the best restaurants near Electronic City", emoji: "🍽️" },
+    { text: "Feeling adventurous! Suggest an exciting cuisine.", emoji: "🗺️" },
     { text: "I want something sweet and delicious", emoji: "🍰" }
   ]
 
@@ -127,22 +127,22 @@ export function ChatInterface({ onSendMessage, isLoading = false }: ChatInterfac
                 <div className="message-content">
                   {!message.isUser && <div className="bot-avatar">🍽️</div>}
                   <div className="message-text">
-                    <ReactMarkdown 
+                    <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       components={{
                         // Custom styling for markdown elements
-                        h1: ({children}) => <h1 className="markdown-h1">{children}</h1>,
-                        h2: ({children}) => <h2 className="markdown-h2">{children}</h2>,
-                        h3: ({children}) => <h3 className="markdown-h3">{children}</h3>,
-                        strong: ({children}) => <strong className="markdown-strong">{children}</strong>,
-                        em: ({children}) => <em className="markdown-em">{children}</em>,
-                        ul: ({children}) => <ul className="markdown-ul">{children}</ul>,
-                        ol: ({children}) => <ol className="markdown-ol">{children}</ol>,
-                        li: ({children}) => <li className="markdown-li">{children}</li>,
-                        p: ({children}) => <p className="markdown-p">{children}</p>,
-                        code: ({children}) => <code className="markdown-code">{children}</code>,
-                        pre: ({children}) => <pre className="markdown-pre">{children}</pre>,
-                        blockquote: ({children}) => <blockquote className="markdown-blockquote">{children}</blockquote>,
+                        h1: ({ children }) => <h1 className="markdown-h1">{children}</h1>,
+                        h2: ({ children }) => <h2 className="markdown-h2">{children}</h2>,
+                        h3: ({ children }) => <h3 className="markdown-h3">{children}</h3>,
+                        strong: ({ children }) => <strong className="markdown-strong">{children}</strong>,
+                        em: ({ children }) => <em className="markdown-em">{children}</em>,
+                        ul: ({ children }) => <ul className="markdown-ul">{children}</ul>,
+                        ol: ({ children }) => <ol className="markdown-ol">{children}</ol>,
+                        li: ({ children }) => <li className="markdown-li">{children}</li>,
+                        p: ({ children }) => <p className="markdown-p">{children}</p>,
+                        code: ({ children }) => <code className="markdown-code">{children}</code>,
+                        pre: ({ children }) => <pre className="markdown-pre">{children}</pre>,
+                        blockquote: ({ children }) => <blockquote className="markdown-blockquote">{children}</blockquote>,
                         hr: () => <hr className="markdown-hr" />,
                       }}
                     >
@@ -151,7 +151,7 @@ export function ChatInterface({ onSendMessage, isLoading = false }: ChatInterfac
                   </div>
                   {message.isUser && <div className="user-avatar">👤</div>}
                 </div>
-                <div className="message-time">
+                <div className="message-time" suppressHydrationWarning>
                   {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
               </div>
@@ -182,7 +182,7 @@ export function ChatInterface({ onSendMessage, isLoading = false }: ChatInterfac
 
       {/* Quick Suggestions */}
       {messages.length === 1 && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="suggestions-container"
@@ -206,7 +206,7 @@ export function ChatInterface({ onSendMessage, isLoading = false }: ChatInterfac
                       timestamp: new Date()
                     }
                     setMessages(prev => [...prev, userMessage])
-                    
+
                     // Send the message
                     onSendMessage(suggestion.text).then(response => {
                       // Add a small delay to make the chat feel more natural

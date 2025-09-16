@@ -51,6 +51,7 @@ app.add_middleware(
 class UserRequest(BaseModel):
     message: str
     user_id: str = "default_user"
+    session_id: str | None = None
 
 @app.get("/", tags=["Readiness"])
 def read_root():
@@ -66,10 +67,11 @@ def ready_check():
 
 @app.post("/recommendation", response_model=FoodRecommendation, tags=["Recommendation"])
 def get_recommendation(request: UserRequest):
-    # Pass both message and user_id in the message field for the workflow
+    # Pass message, user_id, and session_id in the message field for the workflow
     result = food_workflow.run({
         "message": request.message,
-        "user_id": request.user_id
+        "user_id": request.user_id,
+        "session_id": request.session_id
     })
 
     if result and result.status == "COMPLETED" and isinstance(result.content, FoodRecommendation):

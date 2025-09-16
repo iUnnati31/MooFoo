@@ -4,6 +4,32 @@ import { useState, useEffect } from 'react'
 import { ChatInterface } from '@/components/chat-interface'
 import { api, FoodRecommendation as ApiFoodRecommendation } from '@/lib/api'
 
+// Helper to get or create a user ID
+const getUserId = (): string => {
+  if (typeof window !== 'undefined') {
+    let userId = localStorage.getItem('mooFooUserId')
+    if (!userId) {
+      userId = crypto.randomUUID()
+      localStorage.setItem('mooFooUserId', userId)
+    }
+    return userId
+  }
+  return 'default_user' // Fallback for server-side
+}
+
+// Helper to get or create a session ID
+const getSessionId = (): string => {
+  if (typeof window !== 'undefined') {
+    let sessionId = sessionStorage.getItem('mooFooSessionId')
+    if (!sessionId) {
+      sessionId = crypto.randomUUID()
+      sessionStorage.setItem('mooFooSessionId', sessionId)
+    }
+    return sessionId
+  }
+  return '' // Fallback for server-side
+}
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [, setCurrentRecommendation] = useState<ApiFoodRecommendation | null>(null)
@@ -48,7 +74,8 @@ export default function Home() {
 
       const response = await api.getRecommendation({
         message: enhancedMessage,
-        user_id: 'frontend_user'
+        user_id: getUserId(),
+        session_id: getSessionId()
       })
 
       setCurrentRecommendation(response)

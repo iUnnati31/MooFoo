@@ -20,6 +20,7 @@ def get_recommendation_executor(step_input: StepInput) -> StepOutput:
     input_data = step_input.message
     user_message = input_data.get("message", "")
     user_id = input_data.get("user_id", "default_user")
+    session_id = input_data.get("session_id") # Get session_id
     user_message_lower = user_message.lower()
     
     # 1. Choose the agent
@@ -47,7 +48,8 @@ def get_recommendation_executor(step_input: StepInput) -> StepOutput:
     try:
         agent_response = agent_to_use.run(
             message=enriched_message,
-            user_id=user_id
+            user_id=user_id,
+            session_id=session_id # Pass session_id to the agent
         )
         
         # 4. Check if the agent returned the correct structured object
