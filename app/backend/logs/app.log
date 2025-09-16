@@ -71,3 +71,6 @@
 2025-09-16 19:47:50,013 - INFO - HTTP Request: POST https://sriga-maoz6vbm-eastus2.cognitiveservices.azure.com/openai/deployments/o4-mini/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
 2025-09-16 19:47:53,630 - INFO - HTTP Request: POST https://api.agno.com/v1/telemetry/agent/run/create "HTTP/1.1 200 OK"
 2025-09-16 19:52:00,624 - INFO - HTTP Request: POST https://sriga-maoz6vbm-eastus2.cognitiveservices.azure.com/openai/deployments/o4-mini/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-09-16 19:53:02,192 - INFO - HTTP Request: POST https://sriga-maoz6vbm-eastus2.cognitiveservices.azure.com/openai/deployments/o4-mini/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-09-16 19:53:23,039 - INFO - HTTP Request: POST https://sriga-maoz6vbm-eastus2.cognitiveservices.azure.com/openai/deployments/o4-mini/chat/completions?api-version=2024-12-01-preview "HTTP/1.1 200 OK"
+2025-09-16 19:53:26,997 - INFO - HTTP Request: POST https://api.agno.com/v1/telemetry/agent/run/create "HTTP/1.1 200 OK"
