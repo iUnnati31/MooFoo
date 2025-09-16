@@ -1,4 +1,4 @@
-# MooFoo - Your Personal Food Assistant 🍕
+## Hi! I am MooFoo - Your Personal Food Assistant 🍕
 
 **MooFoo** is an intelligent AI-powered food recommendation chatbot that provides personalized food suggestions based on your mood, preferences, and dietary requirements. Whether you want to cook at home or dine out, MooFoo analyzes your current state of mind and offers tailored recommendations for recipes and restaurants.
 
