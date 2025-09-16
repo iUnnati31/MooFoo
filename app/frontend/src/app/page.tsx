@@ -4,6 +4,15 @@ import { useState, useEffect } from 'react'
 import { ChatInterface } from '@/components/chat-interface'
 import { api, FoodRecommendation as ApiFoodRecommendation } from '@/lib/api'
 
+interface Particle {
+  id: number;
+  '--delay': string;
+  '--duration': string;
+  '--x': string;
+  '--y': string;
+  emoji: string;
+}
+
 // Helper to get or create a user ID
 const getUserId = (): string => {
   if (typeof window !== 'undefined') {
@@ -33,7 +42,7 @@ const getSessionId = (): string => {
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [, setCurrentRecommendation] = useState<ApiFoodRecommendation | null>(null)
-  const [particles, setParticles] = useState<any[]>([])
+  const [particles, setParticles] = useState<Particle[]>([])
 
   useEffect(() => {
     setParticles([...Array(12)].map((_, i) => ({
@@ -96,7 +105,7 @@ export default function Home() {
           // Add ingredients
           if (recipe.ingredients && recipe.ingredients.length > 0) {
             responseText += `**🥘 Ingredients:**\n`
-            recipe.ingredients.forEach((ingredient, idx) => {
+            recipe.ingredients.forEach((ingredient) => {
               responseText += `• ${ingredient}\n`
             })
             responseText += `\n`
@@ -118,7 +127,7 @@ export default function Home() {
           // Add YouTube videos
           if (recipe.youtube_videos && recipe.youtube_videos.length > 0) {
             responseText += `**📺 Watch How to Make It:**\n`
-            recipe.youtube_videos.forEach((video, idx) => {
+            recipe.youtube_videos.forEach((video) => {
               responseText += `• ${video}\n`
             })
             responseText += `\n`
