@@ -1,11 +1,11 @@
 [project]
-name = "moofoo"
+name = "moofoorecomm"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "agno>=1.7.6",
+    "agno==1.7.9",
     "fastapi>=0.116.1",
     "googlesearch-python>=1.3.0",
     "openai>=1.97.1",

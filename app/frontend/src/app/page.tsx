@@ -1,12 +1,24 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ChatInterface } from '@/components/chat-interface'
 import { api, FoodRecommendation as ApiFoodRecommendation } from '@/lib/api'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [, setCurrentRecommendation] = useState<ApiFoodRecommendation | null>(null)
+  const [particles, setParticles] = useState<any[]>([])
+
+  useEffect(() => {
+    setParticles([...Array(12)].map((_, i) => ({
+      id: i,
+      '--delay': `${i * 0.5}s`,
+      '--duration': `${3 + i * 0.5}s`,
+      '--x': `${Math.random() * 100}%`,
+      '--y': `${Math.random() * 100}%`,
+      emoji: ['🍕', '🍜', '🍔', '🍰', '🥗', '🍝', '🍣', '🍟', '🍦', '🥐', '🍪', '🍩'][i]
+    })))
+  }, [])
 
   // Helper function to get rating description
   const getRatingDescription = (rating: number): string => {
@@ -173,14 +185,14 @@ export default function Home() {
     <div className="app-container">
       {/* Floating Food Particles */}
       <div className="floating-particles">
-        {[...Array(12)].map((_, i) => (
-          <div key={i} className="particle" style={{
-            '--delay': `${i * 0.5}s`,
-            '--duration': `${3 + i * 0.5}s`,
-            '--x': `${Math.random() * 100}%`,
-            '--y': `${Math.random() * 100}%`
+        {particles.map(particle => (
+          <div key={particle.id} className="particle" style={{
+            '--delay': particle['--delay'],
+            '--duration': particle['--duration'],
+            '--x': particle['--x'],
+            '--y': particle['--y']
           } as React.CSSProperties}>
-            {['🍕', '🍜', '🍔', '🍰', '🥗', '🍝', '🍣', '🍟', '🍦', '🥐', '🍪', '🍩'][i]}
+            {particle.emoji}
           </div>
         ))}
       </div>
